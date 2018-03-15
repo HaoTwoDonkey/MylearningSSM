@@ -35,7 +35,7 @@ OrderList = {
         }
         $.ajax({
             type: "post",
-            url: "/web/orderList/addItem.action",
+            url: "/items/addItem",
             data: {
                 name : $("#name").val(),
                 price : $("#price").val(),

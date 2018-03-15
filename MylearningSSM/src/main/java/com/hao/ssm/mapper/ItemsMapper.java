@@ -2,6 +2,8 @@ package com.hao.ssm.mapper;
 
 import com.hao.ssm.pojo.Items;
 
+import java.util.List;
+
 public interface ItemsMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +18,8 @@ public interface ItemsMapper {
     int updateByPrimaryKeyWithBLOBs(Items record);
 
     int updateByPrimaryKey(Items record);
+
+    List<Items> findItemsListByName(String name);
+
+    Integer addOrderItem(Items items);
 }

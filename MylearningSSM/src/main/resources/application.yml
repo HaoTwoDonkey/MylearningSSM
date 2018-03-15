@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/hao
+    url: jdbc:mysql://localhost:3306/hao?useSSL=true
     username: root
     password: haozb
   redis:
@@ -24,3 +24,10 @@ spring:
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.hao.ssm.pojo
+  config-location: classpath:static/sqlMapConfig.xml
+pagehelper:
+    reasonable: true
+    params: count=countSql
+logging:
+  level:
+  com.hao.ssm.mapper: debug

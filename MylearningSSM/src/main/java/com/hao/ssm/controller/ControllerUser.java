@@ -33,13 +33,12 @@ public class ControllerUser {
         } catch (Exception e) {
             user.setPassword("");
         }
-        log.debug("接收到用户名为：" + user.getUsername() + "________加密后的密码为：" + user.getPassword());
 
         User result = userService.login(user);
 
         if (result == null) {
-            log.debug("根据参数未查询到用户信息！");
-            return ResultGenerator.genFailResult("请输入正确的用户名，密码");
+            log.debug("鐧诲綍澶辫触");
+            return ResultGenerator.genFailResult("鐧诲綍澶辫触");
         }
         return ResultGenerator.genSuccessResult(result);
     }

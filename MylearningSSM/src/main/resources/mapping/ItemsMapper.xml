@@ -118,4 +118,22 @@
       createtime = #{createtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="findItemsListByName" resultMap="ResultMapWithBLOBs" parameterType="String">
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from items
+    <where>
+      <if test="value != null">
+        and name like '%${value}%'
+      </if>
+    </where>
+  </select>
+  <insert id="addOrderItem" parameterType="Items">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT Last_insert_id()
+    </selectKey>
+    insert into items (name,price,detail,createtime) values (#{name},#{price},#{detail},now())
+  </insert>
 </mapper>
