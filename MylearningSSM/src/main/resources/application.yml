@@ -1,0 +1,26 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hao
+    username: root
+    password: haozb
+  redis:
+    database: 0
+    host: 10.200.103.104
+    port: 6379
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    timeout: 0
+  resources:
+    static-locations: classpath:/static/,classpath:/pages/
+  thymeleaf:
+    cache : false
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.hao.ssm.pojo

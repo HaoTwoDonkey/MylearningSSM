@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="GBK">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>登录</title>
+    <meta name="keywords" content="perfect-ssm">
+    <meta name="description" content="perfect-ssm">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/font-awesome.min93e3.css" rel="stylesheet">
+
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/login.js"></script>
+    <style>
+        body {
+            background: url(images/login_bg_0.jpg) #f8f6e9 0 0 no-repeat;
+            background-size: cover;
+        }
+
+        .logo-name {
+            color: rgb(212, 106, 64);
+            font-size: 80px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 0
+        }
+    </style>
+</head>
+
+<body class="gray-bg">
+<div class="text-center animated fadeInDown">
+    <h1 class="logo-name"><span class="glyphicon glyphicon-fire"></span> Mr Hao</h1>
+</div>
+<div class="middle-box text-center loginscreen  animated fadeInLeft">
+    <div>
+
+        <h3>欢迎使用</h3>
+        <form class="m-t" role="form" id="adminlogin" method="post"
+              name="adminlogin" onsubmit="return false" action="##">
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="用户名" name="username" id="username" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="密码" name="password" id="password" required="">
+            </div>
+            <div>
+                <span id="errorText" style="color:red;"></span>
+            </div>
+            <button type="button" class="btn btn-primary block full-width m-b" onclick="javascript:Login.doLog();">登 录
+            </button>
+            <p class="text-muted text-center"><a href="##" onclick="javascript:adminlogin.reset();return false;">
+                <small>重置</small>
+            </a>
+            </p>
+        </form>
+    </div>
+</div>
+
+</body>
+
+</html>
