@@ -3,6 +3,7 @@ package com.hao.ssm.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hao.ssm.annotation.AnnoLog;
 import com.hao.ssm.common.Result;
 import com.hao.ssm.common.ResultGenerator;
 import com.hao.ssm.pojo.Items;
@@ -10,6 +11,8 @@ import com.hao.ssm.pojo.PageBean;
 import com.hao.ssm.service.ItemsService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -18,7 +21,7 @@ import java.util.Map;
 
 /**
  * @author : hao
- * @description : è®¢å•çš„Controller
+ * @description : ¶©µ¥µÄController
  * @time : 2018/3/12 13:33
  */
 @RestController
@@ -30,12 +33,13 @@ public class ControllerItems {
     private static final Logger log = Logger.getLogger(ControllerItems.class);
 
     /**
-     * restful é£æ ¼çš„è¯·æ±‚
+     * restful ·ç¸ñµÄÇëÇó
      *
      * @param name
      * @return
      */
     @GetMapping("/queryList/{name}")
+    @Cacheable(value = "Items")
     public List<Items> queryOrderList(@PathVariable(value = "name") String name) {
 
         List<Items> items = itemsService.findItemsListByName(name);
@@ -47,6 +51,7 @@ public class ControllerItems {
     }
 
     @PostMapping("/queryByMap")
+    @Cacheable(value = "Items")
     public PageBean query(@RequestParam Map<String, String> map) {
         PageHelper.startPage(Integer.valueOf(map.get("page")), Integer.valueOf(map.get("rows")));
         List<Items> items = itemsService.findItemsListByName(map.get("name"));
@@ -59,8 +64,9 @@ public class ControllerItems {
     }
 
     @PostMapping("/queryByObj")
+    @Cacheable(value = "Items")
+    @AnnoLog(operationType="´«²ÎÍ¨¹ı×Ô¶¨ÒåjavaBean·½Ê½²éÑ¯items")
     public PageBean queryByObj(Items items) {
-        log.debug("æ€ä¹ˆä¸æ‰“å°æ—¥å¿—å‘¢");
         PageHelper.startPage(items.getPage(), items.getRows());
         List<Items> list = itemsService.findItemsListByName(items.getName());
         if (list.size() == 0) {
@@ -71,25 +77,8 @@ public class ControllerItems {
         return pageBean;
     }
 
-/*    @RequestMapping("/queryListByPage")
-    @AnnoLog(operationType="æŸ¥è¯¢å•†å“åˆ—è¡¨åˆ†é¡µ")
-    public @ResponseBody
-    PageBean<Items> findItemsListByPage(ItemsCustom itemsCustom){
-
-        PageHelper.startPage(itemsCustom.getPage(),itemsCustom.getRows());
-        List<Items> items = itemsService.findItemsListByPage(itemsCustom);
-        if(items.size()==0){
-            return new PageBean(0,new ArrayList());
-        }
-        PageInfo<Items> pageInfo = new PageInfo<Items>(items);
-
-        PageBean<Items> pageBean = new PageBean<Items>(pageInfo.getTotal(),pageInfo.getList());
-        return pageBean;
-    }
-*/
-
-
     @PostMapping("/addItem")
+    @CacheEvict(value = "Girl", allEntries = true)
     public Result addOrderItem(Items items) {
         Integer lastId = itemsService.addOrderItem(items);
         if (lastId == null) {

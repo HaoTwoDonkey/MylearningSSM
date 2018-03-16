@@ -66,4 +66,21 @@ public class Items extends CommonPageParam implements Serializable{
     public void setDetail(String detail) {
         this.detail = detail == null ? null : detail.trim();
     }
+
+    /**
+     * 一定要重写toString方法
+     * 因为缓存用obj.toString()
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "Items{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", pic='" + pic + '\'' +
+                ", createtime=" + createtime +
+                ", detail='" + detail + '\'' +
+                '}';
+    }
 }

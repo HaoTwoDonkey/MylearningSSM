@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author : hao
- * @description :
+ * @description : userÒµÎñµÄ¿ØÖÆ²ã
  * @time : 2018/3/9 14:53
  */
 @RestController
@@ -37,8 +37,8 @@ public class ControllerUser {
         User result = userService.login(user);
 
         if (result == null) {
-            log.debug("ç™»å½•å¤±è´¥");
-            return ResultGenerator.genFailResult("ç™»å½•å¤±è´¥");
+            log.debug("µÇÂ¼Ê§°Ü");
+            return ResultGenerator.genFailResult("µÇÂ¼Ê§°Ü");
         }
         return ResultGenerator.genSuccessResult(result);
     }
